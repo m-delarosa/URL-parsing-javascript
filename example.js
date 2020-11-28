@@ -69,6 +69,53 @@ url3.searchParams.has('missing') // => false
 // console.log(url3.searchParams.has('message')) 
 // console.log(url3.searchParams.has('missing')) 
 
+// 4 Hostname - url.hostname property holds the hostname of the URL
 
+console.log("url3.hostname", url3.hostname) // => "example.com"
 
+//5 Pathname - url.pathname property accesses the pathname of the URL
 
+console.log("url3.pathname", url3.pathname) // => "/path/index.html"
+
+//If the URL does not have a path. the url.pathname property returns a slash "/"
+
+const url4 = new URL("http://example.com")
+
+console.log("url4.pathname", url4.pathname)
+
+//6 Hash - the hash can be accessed using url.hash property:
+
+const url5 = new URL('http://example.com/path/index.html#bottom')
+url5.hash // => '#bottom'
+
+// When the hash in the URL is missing, url.hash evaluates to an empty string ''
+
+// 7 URL Validation
+
+// When new URL() constructor creates an instance, as a side effect, it also validates the URL for correctness. If the URL value is invalid, a TypeError is thrown.
+
+// For example, http ://example.com is an invalid URL because of the space character after http.
+
+// Let’s use this invalid URL to initialize the parser:
+
+try {
+  const url6 = new URL('http ://example.com')
+} catch (error) {
+  error // => TypeError, "Failed to construct URL: Invalid URL"
+}
+
+// 8 - URL Manipulation
+
+// Aside from accessing URL components, the properties like search, hostname, pathname, hash are writeable — thus you can manipulate the URL.
+
+// For example, let’s modify the hostname of an existing URL from red.com to blue.io:
+
+const url7 = new URL('http://red.com/path/index.html')
+
+url7.href // => 'http://red.com/path/index.html'
+
+url7.hostname = 'blue.io'
+
+url7.href // => 'http://blue.io/path/index.html'
+
+//Note that only origin and searchParams properties of the URL() instance are readonly. All the other one are writable and modify the URL when you change them.
